@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar</title>
+    <%- include("../partials/header.ejs") %>
+</head>
+
+<body>
+    
+    <div class="container">
+    
+
+        <% if (salvo != undefined){ %>
+            <div style="text-align:center; background-color:green; color:white">
+                Produto cadastrada com sucesso!
+            </div>
+        <%}%>
+
+        <% if (removido != undefined){ %>
+            <div style="text-align:center; background-color:brown; color:white">
+                Produto removida com sucesso!
+            </div>
+        <%}%>
+
+        <table class="table">
+            
+            <h1 style="font-size:45px;text-align:center;">Relatório de Produtos</h1>
+            <a class="btn btn-dark" href="/produto/cadastrar"> Cadastrar</a>
+
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Detalhes</th>
+                <th>Atualizar</th>
+                <th>Remover</th>
+            </tr>
+
+            <% for(let produto of listaProduto) {  %>
+                <tr>
+                    <td>
+                        <%= produto.codigo%>
+                    </td>
+                    <td>
+                        <%= produto.nome%>
+                    </td>
+                    <td>
+                        <%= produto.preco%>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="/produto/<%= produto.codigo %>"> Detalhes</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-dark" href="/produto/cadastrar/<%= produto.codigo %>"> Atualizar</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" onclick="return confirm('Confirmar remoção?')" href="/produto/remover/<%= produto.codigo %>"> Remover</a>
+                    </td>
+                </tr>
+
+            <% } %>
+
+        </table>
+
+        <div>
+            <a class="btn btn-dark" href="/" >Voltar</a>
+        </div>
+
+    </div>
+
+</body>
+
+<foot>
+    <%- include("../partials/footer.ejs") %>
+</foot>
+
+
+</html>
